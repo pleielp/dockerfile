@@ -1,5 +1,5 @@
 FROM node:18-alpine
-FROM python:3.18-slim
+FROM python:3.11-slim
 
 RUN apk update
 RUN apk add -no-cache \
