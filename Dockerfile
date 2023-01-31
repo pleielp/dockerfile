@@ -2,7 +2,7 @@ FROM node:18-alpine
 FROM python:3.18-slim
 
 RUN apk update
-RUN apk add -no-cache
+RUN apk add -no-cache \
       zip
 
 # pip install
