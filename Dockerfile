@@ -1,17 +1,14 @@
-FROM node:12-alpine
+FROM python:3.18-slim
+FROM node:18-alpine
 
-WORKDIR /app
-COPY *.json ./
-COPY *.js ./
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
+      zip
 
-COPY ./bin ./bin/
-COPY ./public ./public/
-COPY ./routes ./routes/
-COPY ./views ./views/
+# pip install
+RUN python -m pip install --upgrade pip
 
-RUN chown -Rf node:node .
-
-USER node
-EXPOSE 3000
-RUN npm ci --only=production
-ENTRYPOINT [ "npm", "start" ]
+RUN pip3 install -r requirements.txt
+RUN pip3 install pynecone-io
+RUN pc init
+RUN pc run
