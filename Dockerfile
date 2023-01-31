@@ -22,7 +22,7 @@ SHELL ["/bin/bash", "-c"]
 RUN python -m pip install --upgrade pip
 
 # build
-WORKDIR /app
+WORKDIR /web-frontend
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
@@ -30,7 +30,8 @@ RUN pip3 install pynecone-io
 
 # prepare start
 # COPY ./ ./
-RUN chown -Rf python:python /app
+RUN chown -Rf python:python /web-frontend
 USER python
 
 RUN pc init
+RUN pc run
