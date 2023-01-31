@@ -4,6 +4,5 @@ env311
 pynecone.db
 
 .web
-assets
 
 activate.bat
