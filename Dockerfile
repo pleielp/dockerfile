@@ -12,7 +12,7 @@ RUN apt-get install -y --no-install-recommends \
 RUN python -m pip install --upgrade pip
 
 #RUN pip3 install -r requirements.txt
-RUN adduser -D pleielp
+RUN adduser --disabled-password pleielp
 USER pleielp
 
 RUN pip3 install pynecone-io
