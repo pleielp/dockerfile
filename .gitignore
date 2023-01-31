@@ -1,36 +1,9 @@
-### Node ###
-# Logs
-logs
-*.log
-npm-debug.log*
-.DS_Store
+__pycache__
+env311
+.gitignore
+pynecone.db
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+.web
+assets
 
-# Dependency directories
-node_modules
-jspm_packages
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Optional REPL history
-.node_repl_history
-
-
-### Emacs ###
-*~
-\#*\#
-\.#*
-.projectile
-
-buildpath.js
-.test/
-lib/
+activate.bat
