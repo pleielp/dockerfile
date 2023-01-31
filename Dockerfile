@@ -29,7 +29,7 @@ ENV PYTHONUNBUFFERED=1
 RUN pip3 install pynecone-io
 
 # prepare start
-COPY ./ ./
+# COPY ./ ./
 RUN chown -Rf python:python /app
 USER python
 
