@@ -10,6 +10,8 @@ RUN apt-get install -y --no-install-recommends \
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - &&\
       apt-get install -y nodejs
 RUN npm i -g next
+RUN apt-get install -y --no-install-recommends \
+      nano
       
 RUN groupadd --gid 1000 python \
     && useradd --uid 1000 --gid python --shell /bin/bash --create-home python
