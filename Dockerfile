@@ -1,8 +1,8 @@
-FROM python:3.18-slim
 FROM node:18-alpine
+FROM python:3.18-slim
 
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends \
+RUN apk update
+RUN apk add -no-cache
       zip
 
 # pip install
