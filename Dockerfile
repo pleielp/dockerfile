@@ -33,5 +33,5 @@ RUN pip3 install pynecone-io
 RUN chown -Rf python:python /web-frontend
 USER python
 
-RUN pc init
-RUN pc run
+# RUN pc init
+# RUN pc run
