@@ -4,6 +4,8 @@ RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
       zip
 RUN apt-get install -y --no-install-recommends \
+      unzip
+RUN apt-get install -y --no-install-recommends \
       curl
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - &&\
       apt-get install -y nodejs
