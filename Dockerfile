@@ -28,12 +28,13 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # RUN pip3 install pynecone-io
+COPY ./requirements.txt* ./
 RUN pip3 install -r requirements.txt
 
 # prepare start
-# COPY ./ ./
 RUN chown -Rf python:python /home/python/web-frontend-pynecone
 USER python
 
+COPY ./ ./
 RUN pc init
 # RUN pc run
