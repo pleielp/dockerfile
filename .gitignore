@@ -3,6 +3,6 @@ env311
 .gitignore
 pynecone.db
 
-.web
+# .web
 
 activate.bat

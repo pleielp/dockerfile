@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y \
     nodejs \
     unzip \
     && npm i -g next \
+    # && npm i \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/app/venv/bin:$PATH"
