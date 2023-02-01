@@ -46,7 +46,7 @@ WORKDIR /app
 
 # CMD ["pc","run" , "--env", "prod"]
 # CMD ["pc","run"]
-# RUN pc run
+RUN pc run
 
 EXPOSE 3000
 EXPOSE 8000
