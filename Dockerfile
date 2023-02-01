@@ -1,40 +1,50 @@
-FROM python:3.11-slim
+FROM python:3.11-slim as base
 
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends \
-      zip
-RUN apt-get install -y --no-install-recommends \
-      unzip
-RUN apt-get install -y --no-install-recommends \
-      curl
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - &&\
-      apt-get install -y nodejs
-RUN npm i -g next
-RUN apt-get install -y --no-install-recommends \
-      nano
-      
-RUN groupadd --gid 1000 python \
-    && useradd --uid 1000 --gid python --shell /bin/bash --create-home python
-RUN touch ~/.bashrc && chmod +x ~/.bashrc
-SHELL ["/bin/bash", "-c"] 
+RUN adduser --disabled-password pynecone
 
-# pip install
-RUN python -m pip install --upgrade pip
 
-# build
-WORKDIR /home/python/web-frontend-pynecone
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+FROM base as build
 
-# RUN pip3 install pynecone-io
-COPY ./requirements.txt* ./
-RUN pip3 install -r requirements.txt
+WORKDIR /app
+ENV VIRTUAL_ENV=/app/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# prepare start
-RUN chown -Rf python:python /home/python/web-frontend-pynecone
-USER python
+COPY . .
 
-RUN curl https://bun.sh/install | bash
-COPY ./ ./
+RUN pip install wheel \
+    && pip install -r requirements.txt
+
+
+FROM base as runtime
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    && curl -fsSL https://deb.nodesource.com/setup_19.x | bash - \
+    && apt-get update && apt-get install -y \
+    nodejs \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV PATH="/app/venv/bin:$PATH"
+
+
+FROM runtime as init
+
+WORKDIR /app
+ENV BUN_INSTALL="/app/.bun"
+COPY --from=build /app/ /app/
 RUN pc init
-# RUN pc run
+
+
+FROM runtime
+
+COPY --chown=pynecone --from=init /app/ /app/
+USER pynecone
+WORKDIR /app
+
+# CMD ["pc","run" , "--env", "prod"]
+CMD ["pc","run"]
+
+EXPOSE 3000
+EXPOSE 8000
