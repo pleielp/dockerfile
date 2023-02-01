@@ -44,7 +44,7 @@ USER pynecone
 WORKDIR /app
 
 # CMD ["pc","run" , "--env", "prod"]
-CMD ["pc","run"]
+# CMD ["pc","run"]
 
 EXPOSE 3000
 EXPOSE 8000
