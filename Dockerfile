@@ -23,8 +23,8 @@ RUN apt-get update && apt-get install -y \
     && curl -fsSL https://deb.nodesource.com/setup_19.x | bash - \
     && apt-get update && apt-get install -y \
     nodejs \
-#     npm i -g next \
     unzip \
+    && npm i -g next \
     && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="/app/venv/bin:$PATH"
